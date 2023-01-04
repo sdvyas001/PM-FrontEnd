@@ -1,0 +1,44 @@
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import "~bootstrap/dist/css/bootstrap.min.css";
+@import "~@ng-select/ng-select/themes/default.theme.css";
+/* @import "~@ng-select/ng-select/themes/material.theme.css"; */
+
+@import '../node_modules/@syncfusion/ej2-base/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-buttons/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-calendars/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-dropdowns/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-inputs/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-navigations/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-popups/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-grids/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-treegrid/styles/material.css';
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700|Material+Icons');
+
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+  font-family: "Roboto", sans-serif;
+  font-size: 13px;
+}
+
+.ng-select .ng-select-container {
+  height: 50px;
+  border-radius: 10px;
+}
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import "~bootstrap/dist/css/bootstrap.min.css";
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+  font-family: "Roboto", sans-serif;
+  font-size: 13px;
+}
+
+.ng-select .ng-select-container {
+  height: 50px;
+  border-radius: 10px;
+}

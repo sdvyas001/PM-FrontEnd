@@ -1,0 +1,1440 @@
+<div class="row">
+    <div class="col-md-12 col-md-offset-3">
+      <form [formGroup]="basicInfo" id="msform">
+        <!-- progressbar -->
+        <ul id="progressbar">
+          <li [ngClass]="step >= 1 ? 'active ' : 'inactive'">Offer Basic Info</li>
+          <li [ngClass]="step >= 2 ? 'active' : 'inactive'">Additional Info</li>
+          <li [ngClass]="step >= 3 ? 'active' : 'inactive'">Channel Info</li>
+          <li [ngClass]="step >= 4 ? 'active' : 'inactive'">Ordering Info</li>
+          <li [ngClass]="step == 5 ? 'active' : 'inactive'">Notification Info</li>
+        </ul>
+        <!-- fieldsets -->
+  
+        <fieldset *ngIf="step == 1">
+          <h2 class="fs-title">Offer Basic Info</h2>
+  
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-2">
+                <label for="offerFamilyName">Offer Family Name :</label>
+              </div>
+              <div class="col-sm-4">
+                <!-- <select class="form-control" id="offerFamilyName" #sel="ngModel"
+                  [(ngModel)]="Id" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="Id = onChange(sel)" required>
+                              <option *ngFor="let offerFamilyName of offerFamilyNameList" [selected]="Id"  [value]="offerFamilyName.id" >{{offerFamilyName.display}}</option>
+                              </select> -->
+                <!-- <ng-select [items]="offerFamilyNameList"
+                              [virtualScroll]="true"
+                              bindLabel="value"
+                              placeholder="Select offer Family Name"
+                              [(ngModel)]="selectedOfferFamilyName">
+                         </ng-select> -->
+                <!-- <ng-select
+                  class="custom"
+                  [(ngModel)]="offerFamilyNameSelected"
+                  placeholder="select offer family name"
+                  [ngModelOptions]="{ standalone: true }"
+                  style="padding: 0px; width: 100%"
+                  >
+                  <ng-option
+                    class="custom-option"
+                    *ngFor="let offerFamilyName of offerFamilyNameList"
+                    [value]="offerFamilyName.display"
+                    >{{ offerFamilyName.display }}</ng-option
+                  >
+                </ng-select> -->
+                <select aria-label="Small select example" placeholder="select offer family name" [(ngModel)]="offerFamilyNameSelected" [ngModelOptions]="{standalone: true}" cSelect sizing="sm">
+                  <option *ngFor="let offerFamilyName of offerFamilyNameList"
+                  [value]="offerFamilyName.display">{{ offerFamilyName.display }}</option>
+                
+                </select>
+              </div>
+              <div class="col-sm-2">
+                <label for="offerFamilyName">Offer Name :</label>
+              </div>
+              <div class="col-sm-4">
+                <input
+                  type="text"
+                  [(ngModel)]="offerName"
+                  formControlName="offerName"
+                  name="offerName"
+                  placeholder="Offer Name"
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-2"><label>Offer Description :</label></div>
+              <div class="col-sm-10">
+                <textarea
+                  type="text"
+                  [(ngModel)]="offerDescription"
+                  style="width: 100%"
+                  formControlName="offerDescription"
+                  name="offerDescription"
+                  placeholder="Offer Description"
+                ></textarea>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-2">
+                <label for="offerType">Offer Type :</label>
+              </div>
+              <!-- <div class="col-sm-4" > <select class="form-control" id="offerType"  sel="ngModel"
+                      [(ngModel)]="TypeId" 
+                      (ngModelChange)="TypeId = typeOnChange(sel)">
+                      
+                      <option *ngFor="let offerType of offerTypeList" [selected]="TypeId" [value]="offerType.id">{{offerType.display}}</option> -->
+              <div class="col-sm-4">
+                <!-- <select class="form-control" id="offerType" #sel1="ngModel"
+                        [(ngModel)]="typeId" [ngModelOptions]="{standalone: true}"
+                        (ngModelChange)="typeId = onChange(sel1)" required>
+                                    <option *ngFor="let offerType of offerTypeList" [selected]="typeId"  [value]="offerType.id" >{{offerType.display}}</option>
+                                    
+                    </select> -->
+                <!-- <ng-select
+                  class="custom"
+                  [(ngModel)]="offerTypeSelected"
+                  placeholder="select offer type"
+                  [ngModelOptions]="{ standalone: true }"
+                  style="padding: 0px; width: 100%"
+                >
+                  <ng-option
+                    *ngFor="let offerType of offerTypeList"
+                    [value]="offerType.display"
+                    >{{ offerType.display }}</ng-option
+                  >
+                </ng-select> -->
+                <select aria-label="Small select example" [(ngModel)]="offerTypeSelected"
+                placeholder="select offer type" [ngModelOptions]="{standalone: true}" cSelect sizing="sm">
+                  <option  *ngFor="let offerType of offerTypeList"
+                  [value]="offerType.display">{{ offerType.display }}</option>
+                </select>
+              </div>
+              <div class="col-sm-2">
+                <label for="commercialOfferName">Commercial Name :</label>
+              </div>
+              <div class="col-sm-4">
+                <input
+                  type="text"
+                  [(ngModel)]="commercialOfferName"
+                  formControlName="commercialOfferName"
+                  name="commercialOfferName"
+                  placeholder="Offer Commercial Name"
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-2">
+                <label for="offerSalesStartDate">Offer Sales Start Date :</label>
+              </div>
+              <div class="col-sm-4">
+                <mat-form-field
+                  appearance="outline"
+                  style="padding: 0px; width: 100%"
+                >
+                  <input
+                    matInput
+                    [matDatepicker]="picker"
+                    [(ngModel)]="offerSalesStartDate"
+                    (dateChange)="addOfferStartDate($event)"
+                    [ngModelOptions]="{ standalone: true }"
+                    style="padding: 0em; margin-right: 0px"
+                  />
+                  <mat-hint>MM/DD/YYYY</mat-hint>
+                  <mat-datepicker-toggle
+                    matSuffix
+                    [for]="picker"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-2">
+                <label for="commercialOfferName">Offer Sales End Date :</label>
+              </div>
+              <div class="col-sm-4">
+                <mat-form-field
+                  appearance="outline"
+                  style="padding: 0px; width: 100%"
+                >
+                  <input
+                    matInput
+                    [matDatepicker]="picker1"
+                    [(ngModel)]="offerSalesEndDate"
+                    (dateChange)="addOfferEndDate($event)"
+                    [ngModelOptions]="{ standalone: true }"
+                    style="padding: 0em; margin-right: 0px"
+                  />
+                  <mat-hint>MM/DD/YYYY</mat-hint>
+                  <mat-datepicker-toggle
+                    matSuffix
+                    [for]="picker1"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #picker1></mat-datepicker>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-2">
+                <label for="offeringType">Offering Type :</label>
+              </div>
+              <!-- <div class="col-sm-4" ><select formControlName="offeringType" [formGroup]="basicInfo" placeholder="Offering Type">
+                      
+                      <option *ngFor="let offeringType of offeringTypeList">{{offeringType}}</option>
+                    </select></div> -->
+              <div class="col-sm-4">
+                <!-- <select class="form-control" id="offeringType" #sel2="ngModel"
+                      [(ngModel)]="offerTypeId" [ngModelOptions]="{standalone: true}"
+                      (ngModelChange)="offerTypeId = onChange(sel2)" required>
+                                  <option *ngFor="let offeringType of offeringTypeList" [selected]="offerTypeId"  [value]="offeringType.id" >{{offeringType.display}}</option>
+                                  
+                  </select> -->
+                <!-- <ng-select
+                  class="custom"
+                  [(ngModel)]="offeringTypeSelected"
+                  placeholder="select offering type"
+                  [ngModelOptions]="{ standalone: true }"
+                  style="padding: 0px; width: 100%"
+                >
+                  <ng-option
+                    *ngFor="let offeringType of offeringTypeList"
+                    [value]="offeringType.display"
+                    >{{ offeringType.display }}</ng-option
+                  >
+                </ng-select> -->
+                <select aria-label="Small select example" [(ngModel)]="offeringTypeSelected"
+                placeholder="select offering type" [ngModelOptions]="{standalone: true}" cSelect sizing="sm">
+                  <option  *ngFor="let offeringType of offeringTypeList"
+                  [value]="offeringType.display">{{ offeringType.display }}</option>
+                </select>
+              </div>
+              <div class="col-sm-2">
+                <label for="attachments">Offering Life Cycle :</label>
+              </div>
+              <div class="col-sm-4">
+                <!-- <select class="form-control" id="offerLifeCycleType" #sel3="ngModel"
+                      [(ngModel)]="offerLCTId" [ngModelOptions]="{standalone: true}"
+                      (ngModelChange)="offerLCTId = onChange(sel3)" required>
+                                  <option *ngFor="let offerLifeCycleType of offerLifecycleTypeList" [selected]="offerLCTId"  [value]="offerLifeCycleType.id" >{{offerLifeCycleType.display}}</option>
+                                  
+                      </select> -->
+                <!-- <ng-select
+                  class="custom"
+                  [(ngModel)]="offeringLCTSelected"
+                  placeholder="select offering life cycle type"
+                  [ngModelOptions]="{ standalone: true }"
+                  style="padding: 0px; width: 100%"
+                >
+                  <ng-option
+                    *ngFor="let offerLifeCycleType of offerLifecycleTypeList"
+                    [value]="offerLifeCycleType.display"
+                    >{{ offerLifeCycleType.display }}</ng-option
+                  >
+                </ng-select> -->
+                <select aria-label="Small select example" [(ngModel)]="offeringLCTSelected"
+                placeholder="select offering life cycle type" cSelect sizing="sm">
+                  <option *ngFor="let offerLifeCycleType of offerLifecycleTypeList"
+                  [value]="offerLifeCycleType.display">{{ offerLifeCycleType.display }}</option>
+                </select>
+              </div>
+            </div>
+  
+            <div class="row">
+              <div class="col-sm-2">
+                <label for="attachments">Attachment :</label>
+              </div>
+              <div class="col-sm-4">
+                <input
+                  formControlName="attachments"
+                  id="attachments"
+                  type="file"
+                  class="form-control"
+                  (change)="onFileChange($event)"
+                />
+              </div>
+              <div class="col-sm-2"></div>
+              <div class="col-sm-4"></div>
+            </div>
+          </div>
+  
+          <input
+            (click)="next()"
+            type="button"
+            name="next"
+            class="next action-button"
+            value="Next"
+          />
+        </fieldset>
+      </form>
+  
+      <form [formGroup]="additionalInfo" id="msform">
+        <fieldset *ngIf="step == 2">
+          <h2 class="fs-title">Additional Info</h2>
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-2">
+                <label [formGroup]="additionalInfo" for="offerChannel"
+                  >Offer Channel :</label
+                >
+              </div>
+              <div class="col-sm-4">
+                <!-- <select formControlName="offerChannel" [formGroup]="additionalInfo" for="offerChannel">
+                    <option>Offer Channel</option>
+                      <option *ngFor="let pow of offerChannelList" >{{pow}}</option>
+                      </select> -->
+                <!-- <select class="form-control" id="offerChannel" #sel4="ngModel"
+                      [(ngModel)]="offerChannelId" [ngModelOptions]="{standalone: true}"
+                      (ngModelChange)="offerChannelId = onChange(sel4)" required>
+                                  <option *ngFor="let offerChannel of offerChannelList" [selected]="offerChannelId"  [value]="offerChannel.id" >{{offerChannel.display}}</option>
+                                  
+                      </select> -->
+                <ng-select
+                  class="custom"
+                  [(ngModel)]="offerChannelSelected"
+                  placeholder="select offer channel"
+                  [ngModelOptions]="{ standalone: true }"
+                  style="padding: 0px; width: 100%"
+                >
+                  <ng-option
+                    *ngFor="let offerChannel of offerChannelList"
+                    [value]="offerChannel.display"
+                    >{{ offerChannel.display }}</ng-option
+                  >
+                </ng-select>
+              </div>
+              <div class="col-sm-2">
+                <label
+                  formControlName="offerIdentifier"
+                  [formGroup]="additionalInfo"
+                  ngDefaultControl
+                  for="offerFamilyName"
+                  >Offer Identifier :</label
+                >
+              </div>
+              <div class="col-sm-4">
+                <!-- <select formControlName="offerIdentifier" [formGroup]="additionalInfo" placeholder="Offer Identifier">
+                    <option>Offer Identifier</option>
+                    <option *ngFor="let web of offerIdentifierList">{{web}}</option>
+                  </select> -->
+                <!-- <select class="form-control" id="offerIdentifier" #sel5="ngModel"
+                      [(ngModel)]="offerIdfId" [ngModelOptions]="{standalone: true}"
+                      (ngModelChange)="offerIdfId = onChange(sel5)" required>
+                                  <option *ngFor="let offerIdentifier of offerIdentifierList" [selected]="offerIdfId"  [value]="offerIdentifier.id" >{{offerIdentifier.display}}</option>
+                                  
+                      </select> -->
+                <ng-select
+                  class="custom"
+                  [(ngModel)]="offerIDFSelected"
+                  placeholder="select offer identifier"
+                  [ngModelOptions]="{ standalone: true }"
+                  style="padding: 0px; width: 100%"
+                >
+                  <ng-option
+                    *ngFor="let offerIdentifier of offerIdentifierList"
+                    [value]="offerIdentifier.display"
+                    >{{ offerIdentifier.display }}</ng-option
+                  >
+                </ng-select>
+              </div>
+            </div>
+          </div>
+  
+          <div class="row">
+            <div class="col-sm-2">
+              <label for="numberOfInstallment">Number of Installment :</label>
+            </div>
+            <div class="col-sm-4">
+              <input
+                type="number"
+                [(ngModel)]="numberOfInstallment"
+                formControlName="numberOfInstallment"
+                name="numberOfInstallment"
+                placeholder="Offer of Installment"
+              />
+            </div>
+            <div class="col-sm-2">
+              <label for="installmentIfo">Installment Info :</label>
+            </div>
+            <div class="col-sm-4">
+              <input
+                type="text"
+                [(ngModel)]="installmentIfo"
+                formControlName="installmentIfo"
+                name="installmentIfo"
+                placeholder="Installment Info"
+              />
+            </div>
+          </div>
+  
+          <div class="row">
+            <div class="col-sm-2">
+              <label for="parentOfferName">Parent Offer Name :</label>
+            </div>
+            <div class="col-sm-4">
+              
+              <select aria-label="Small select example" placeholder="select offer family name" (click)="searchParentOffer()" [(ngModel)]="parentOfferSelected" [ngModelOptions]="{standalone: true}" cSelect sizing="sm">
+                <option *ngFor="let offerList of parentOfferList"
+                [value]="offerList.id">{{ offerList.name }}</option>
+              
+              </select>
+               
+               
+               
+             
+            </div>
+            <div class="col-sm-2">
+              <label for="offerGrouping">Offer Grouping :</label>
+            </div>
+            <div class="col-sm-4">
+              <input
+                [(ngModel)]="offerGrouping"
+                type="text"
+                formControlName="offerGrouping"
+                name="offerGrouping"
+                placeholder="Offer Grouping"
+              />
+            </div>
+          </div>
+  
+          <div class="row">
+            <div class="col-sm-2">
+              <label for="offerQuantity">Offer Quantity :</label>
+            </div>
+            <div class="col-sm-4">
+              <input
+                type="number"
+                formControlName="offerQuantity"
+                [(ngModel)]="offerQuantity"
+                name="offerQuantity"
+                placeholder="Offer Quantity"
+              />
+            </div>
+            <div class="col-sm-2">
+              <label for="LoyaltyOneTime">Loyalty One Time :</label>
+            </div>
+            <div class="col-sm-4">
+              <input
+                type="text"
+                formControlName="LoyaltyOneTime"
+                [(ngModel)]="LoyaltyOneTime"
+                name="LoyaltyOneTime"
+                placeholder="Loyalty One Time"
+              />
+            </div>
+          </div>
+  
+          <div class="row">
+            <div class="col-sm-2">
+              <label for="LoyaltyPointsRecurring"
+                >Loyalty Points Recurring:</label
+              >
+            </div>
+            <div class="col-sm-4">
+              <input
+                type="text"
+                formControlName="LoyaltyPointsRecurring"
+                [(ngModel)]="LoyaltyPointsRecurring"
+                name="LoyaltyPointsRecurring"
+                placeholder="Loyalty Points Recurring"
+              />
+            </div>
+            <div class="col-sm-2">
+              <label for="offerRelationship">Offer Relationship :</label>
+            </div>
+            <div class="col-sm-4">
+              <!-- <select formControlName="offerRelationship" [formGroup]="additionalInfo" placeholder="Offer Relationship">
+                  <option>Offer Relationship</option>
+                  <option *ngFor="let web of offerRelationshipList">{{web}}</option>
+                  </select> -->
+              <!-- <select class="form-control" id="offerRelationship" #sel6="ngModel"
+                      [(ngModel)]="offerRelId" [ngModelOptions]="{standalone: true}"
+                      (ngModelChange)="offerRelId = onChange(sel6)" required>
+                      <option *ngFor="let offerRelationship of offerRelationshipList" [selected]="offerRelId"  [value]="offerRelationship.id" >{{offerRelationship.display}}</option>
+                                  
+                      </select> -->
+              <ng-select
+                class="custom"
+                [(ngModel)]="offerRelSelected"
+                placeholder="select offer relationship"
+                [ngModelOptions]="{ standalone: true }"
+                style="padding: 0px; width: 100%"
+              >
+                <ng-option
+                  *ngFor="let offerRelationship of offerRelationshipList"
+                  [value]="offerRelationship.display"
+                  >{{ offerRelationship.display }}</ng-option
+                >
+              </ng-select>
+            </div>
+          </div>
+  
+          <div class="row">
+            <div class="col-sm-2">
+              <label for="sharedOfferFlag">Shared Offer Flag :</label>
+            </div>
+            <div class="col-sm-4">
+              <!-- <input type="text" formControlName="sharedOfferFlag" [(ngModel)]="sharedOfferFlag" name="sharedOfferFlag" placeholder="Shared Offer Flag"/> -->
+              <input
+                type="checkbox"
+                [(ngModel)]="sharedOfferFlag"
+                [ngModelOptions]="{ standalone: true }"
+              />
+            </div>
+            <div class="col-sm-2"></div>
+            <div class="col-sm-4"></div>
+          </div>
+  
+          <!-- <select formControlName="offerChannel" [formGroup]="additionalInfo" placeholder="Offer Channel">
+                  <option>Offer Channel</option>
+                  <option *ngFor="let web of offerChannelList">{{web}}</option>
+                </select> -->
+  
+          <!-- <mat-form-field appearance="fill">
+                  <mat-label>Number</mat-label>
+                  <input type="text"
+                         placeholder="Pick one"
+                         aria-label="Number"
+                         matInput
+                         [formControl]="myControl"
+                        >
+                  <mat-autocomplete>
+                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                      {{option}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field> -->
+  
+          <!-- <input type="text" formControlName="offerFamilyName"   placeholder="Offer Family Name"/> -->
+          <!-- <div >
+                    <div>Name is required</div>
+                </div> -->
+  
+          <!-- <input type="text" formControlName="offerIdentifier" name="offerIdentifier" placeholder="Offer Identifier"/> -->
+          <!-- <select formControlName="offerIdentifier" [formGroup]="additionalInfo" placeholder="Offer Identifier">
+                  <option>Offer Identifier</option>
+                  <option *ngFor="let web of offerIdentifierList">{{web}}</option>
+                </select> -->
+          <!-- <div >
+                  <div>Email is required</div>
+               </div> -->
+  
+          <!-- <input type="text" formControlName="numberOfInstallment" name="numberOfInstallment" placeholder="Offer of Installment"/> -->
+          <!-- <div >
+                  <div >Phone is required</div>
+              </div> -->
+  
+          <!-- <input type="text" formControlName="installmentIfo" name="installmentIfo" placeholder="Installment Info"/> -->
+          <!-- <input type="text" formControlName="parentOfferName" name="parentOfferName" placeholder="Parent Offer Name"/> -->
+          <!-- <input type="text" formControlName="offerGrouping" name="offerGrouping" placeholder="Offer Grouping"/> -->
+          <!-- <input type="text" formControlName="sharedOfferFlag" name="sharedOfferFlag" placeholder="Shared Offer Flag"/> -->
+          <!-- <input type="number" formControlName="offerQuantity" name="offerQuantity" placeholder="Offer Quantity"/> -->
+          <!-- <input type="text" formControlName="LoyaltyOneTime" name="LoyaltyOneTime" placeholder="Loyalty One Time"/> -->
+          <!-- <input type="text" formControlName="LoyaltyPointsRecurring" name="LoyaltyPointsRecurring" placeholder="Loyalty Points Recurring"/> -->
+          <!-- <input type="text" formControlName="offerRelationship" name="offerRelationship" placeholder="Offer Relationship"/> -->
+          <!-- <select formControlName="offerRelationship" [formGroup]="additionalInfo" placeholder="Offer Relationship">
+                <option>Offer Relationship</option>
+                <option *ngFor="let web of offerRelationshipList">{{web}}</option>
+              </select> -->
+          <input
+            (click)="previous()"
+            type="button"
+            name="previous"
+            class="previous action-button-previous"
+            value="Previous"
+          />
+          <input
+            (click)="next()"
+            type="button"
+            name="next"
+            class="next action-button"
+            value="Next"
+          />
+        </fieldset>
+      </form>
+      <form [formGroup]="chennelInfo" id="msform">
+        <fieldset *ngIf="step == 3">
+          <h2 class="fs-title">Channel Info</h2>
+          <!-- <input type="text" formControlName="city"  placeholder="City"/>
+              <div >
+                  <div >City is required</div>
+              </div>
+              <textarea rows="5" cols="5" formControlName="address"  placeholder="address"></textarea>
+              <div >
+                  <div>Address is required</div>
+              </div>
+              <input type="text" formControlName="pincode"  placeholder="Pincode"/>
+              <div >
+                  <div >Pincode is required</div>
+              </div> -->
+  
+          <div class="row">
+            <div class="col-sm-2">
+              <label for="activationSMSShortCode"
+                >Activation SMS Short Code :</label
+              >
+            </div>
+            <div class="col-sm-4">
+              <input
+                type="text"
+                formControlName="activationSMSShortCode"
+                [(ngModel)]="activationSMSShortCode"
+                name="activationSMSShortCode"
+                placeholder="Activation SMS Short Code"
+              />
+            </div>
+            <div class="col-sm-2">
+              <label for="terminationSMSShortCode"
+                >Termination SMS Short Code :</label
+              >
+            </div>
+            <div class="col-sm-4">
+              <input
+                type="text"
+                [(ngModel)]="terminationSMSShortCode"
+                formControlName="terminationSMSShortCode"
+                name="terminationSMSShortCode"
+                placeholder="Termination SMS Short Code"
+              />
+            </div>
+          </div>
+  
+          <div class="row">
+            <div class="col-sm-2">
+              <label for="USSDCodes">USSD Codes :</label>
+            </div>
+            <div class="col-sm-4">
+              <input
+                type="text"
+                [(ngModel)]="USSDCodes"
+                formControlName="USSDCodes"
+                name="USSDCodes"
+                placeholder="USSD Codes"
+              />
+            </div>
+            <div class="col-sm-2"></div>
+            <div class="col-sm-4"></div>
+          </div>
+  
+          <!-- <div class="channelInfoCss">
+                <input type="text" formControlName="activationSMSShortCode" name="activationSMSShortCode" placeholder="Activation SMS Short Code"/>
+                <input type="text" formControlName="terminationSMSShortCode" name="terminationSMSShortCode" placeholder="Termination SMS Short Code"/>
+                <input type="text" formControlName="USSDCodes" name="USSDCodes" placeholder="USSD Codes"/>
+                </div> -->
+  
+          <input
+            (click)="previous()"
+            type="button"
+            name="previous"
+            class="previous action-button-previous"
+            value="Previous"
+          />
+          <input
+            (click)="next()"
+            type="button"
+            name="next"
+            class="next action-button"
+            value="Next"
+          />
+        </fieldset>
+      </form>
+      <form [formGroup]="orderingInfo" id="msform">
+        <fieldset *ngIf="step == 4">
+          <h2 class="fs-title">Ordering Info</h2>
+          <!-- <input type="text" formControlName="city"  placeholder="City"/>
+            <div >
+                <div >City is required</div>
+            </div>
+            <textarea rows="5" cols="5" formControlName="address"  placeholder="address"></textarea>
+            <div >
+                <div>Address is required</div>
+            </div>
+            <input type="text" formControlName="pincode"  placeholder="Pincode"/>
+            <div >
+                <div >Pincode is required</div>
+            </div> -->
+  
+          <div class="row">
+            <div class="col-sm-2">
+              <label for="attributeName1">Attribute Name :</label>
+            </div>
+            <div class="col-sm-4">
+              <input
+                type="text"
+                formControlName="attributeName1"
+                [(ngModel)]="attributeName1"
+                name="attributeName1"
+                placeholder="Attribute Name"
+              />
+            </div>
+            <div class="col-sm-2">
+              <label for="AttributeDescription1">Attribute Description :</label>
+            </div>
+            <div class="col-sm-4">
+              <input
+                type="text"
+                [(ngModel)]="AttributeDescription1"
+                formControlName="AttributeDescription1"
+                name="AttributeDescription1"
+                placeholder="Attribute Description"
+              />
+            </div>
+            <hr />
+          </div>
+  
+          <!-- <div class="row ">
+              <div class="col-sm-2"> <label for="attributeName2">Attribute Name :</label></div>
+              <div class="col-sm-4">
+                <input type="text" formControlName="attributeName2" [(ngModel)]="attributeName2" name="attributeName2" placeholder="Attribute Name"/>
+              </div>
+              <div class="col-sm-2"><label for="AttributeDescription2">Attribute Description :</label></div>
+              <div class="col-sm-4"> <input type="text" formControlName="AttributeDescription2" [(ngModel)]="AttributeDescription2" name="AttributeDescription2" placeholder="Attribute Description"/></div>
+              <hr />
+            </div> -->
+  
+          <!-- <div *ngIf="addRow" class="row ">
+              <div class="col-sm-2"> <label for="attributeName3">Attribute Name :</label></div>
+              <div class="col-sm-4">
+                <input type="text" formControlName="attributeName3" [(ngModel)]="attributeName3" name="attributeName3" placeholder="Attribute Name"/>
+              </div>
+              <div class="col-sm-2"><label for="AttributeDescription3">Attribute Description :</label></div>
+              <div class="col-sm-4"><input type="text" formControlName="AttributeDescription3" [(ngModel)]="AttributeDescription3" name="AttributeDescription3" placeholder="Attribute Description"/></div>
+              <hr />
+            </div> -->
+  
+          <!-- <input type="text" formControlName="attributeName1" name="attributeName1" placeholder="Attribute Name"/> -->
+          <!-- <input type="text" formControlName="AttributeDescription1" name="AttributeDescription1" placeholder="Attribute Description"/> -->
+          <!-- <input type="text" formControlName="attributeName2" name="attributeName2" placeholder="Attribute Name"/> -->
+          <!-- <input type="text" formControlName="AttributeDescription2" name="AttributeDescription2" placeholder="Attribute Description"/> -->
+          <!-- <div *ngIf="addRow">
+              <input type="text" formControlName="attributeName3" name="attributeName3" placeholder="Attribute Name"/>
+              <input type="text" formControlName="AttributeDescription3" name="AttributeDescription3" placeholder="Attribute Description"/>
+            </div> -->
+  
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            fill="#ee0979"
+            class="bi bi-plus-circle"
+            (click)="add()"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+            />
+            <path
+              d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"
+            />
+          </svg>
+          <br />
+  
+          <!-- <div class="form-group col-sm-6 col-md-6 col-lg-4 col-xl-4 btn-mt">
+              <lib-button id="addspec" class="primarySmallWidthFixed" (onClickButton)="addSpecificationValue()" text="Add"
+                [disabled]="isSpecNotInList"></lib-button>
+            </div> -->
+          <!-- <input (click)="add()" type="button" name="add" class="previous action-button-previous" value="add"/> -->
+          <table
+            *ngIf="attributeList?.length !== 0"
+            class="table table-responsive"
+          >
+            <thead>
+              <th>Sr. No.</th>
+              <th>Attribute Name</th>
+              <th>Attribute Description</th>
+              <th>Action</th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of attributeList; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td title="{{ data.attributeName }}">{{ data.attributeName }}</td>
+                <td title="{{ data.attributeDescription }}">
+                  {{ data.attributeDescription }}
+                </td>
+                <td>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    fill="#ee0979"
+                    class="bi bi-dash-circle"
+                    (click)="deleteAttribute(i)"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+                    />
+                    <path
+                      d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"
+                    />
+                  </svg>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <input
+            (click)="previous()"
+            type="button"
+            name="previous"
+            class="previous action-button-previous"
+            value="Previous"
+          />
+          <input
+            (click)="next()"
+            type="button"
+            name="next"
+            class="next action-button"
+            value="Next"
+          />
+        </fieldset>
+      </form>
+      <form [formGroup]="notificationInfo" id="msform">
+        <fieldset *ngIf="step == 5">
+          <h2 class="fs-title">Notification Info</h2>
+          <!-- <input type="text" formControlName="highest_qualification" placeholder="Highest Qualification"/>
+                <div >
+                    <div >Highest qualification is required</div>
+                </div>
+                <input type="text" formControlName="university"  placeholder="University"/>
+                <div >
+                    <div>University is required</div>
+                </div>
+                <input type="text" formControlName="total_marks" placeholder="Total Marks"/>
+                <div>
+                    <div>Total marks is required</div>
+                </div> -->
+  
+          <div class="row">
+            <div class="col-sm-1">
+              <label for="notificationType">Type :</label>
+            </div>
+            <div class="col-sm-3">
+              <!-- <select formControlName="notificationType" [formGroup]="notificationInfo" placeholder="Notification Type">
+                      <option>Notification Type</option>
+                      <option *ngFor="let web of notificationTypeList">{{web}}</option>
+                      </select> -->
+              <!-- <select class="form-control" id="notificationType" #sel7="ngModel"
+                      [(ngModel)]="notId" [ngModelOptions]="{standalone: true}"
+                      (ngModelChange)="notId = onChange(sel7)" required>
+                      <option *ngFor="let notificationType of notificationTypeList" [selected]="notId"  [value]="notificationType.id" >{{notificationType.display}}</option>
+                                  
+                      </select> -->
+              <ng-select
+                class="custom"
+                [(ngModel)]="notificationTypeSelected"
+                placeholder="select notification type"
+                [ngModelOptions]="{ standalone: true }"
+                style="padding: 0px; width: 100%"
+              >
+                <ng-option
+                  *ngFor="let notificationType of notificationTypeList"
+                  [value]="notificationType.display"
+                  >{{ notificationType.display }}</ng-option
+                >
+              </ng-select>
+            </div>
+            <div class="col-sm-1">
+              <label for="notificationLanguage">Language:</label>
+            </div>
+            <div class="col-sm-3">
+              <!-- <select formControlName="notificationLanguage" [formGroup]="notificationInfo" placeholder="Notification Language">
+                    <option>Notification Language</option>
+                    <option *ngFor="let web of notifcationLanguageList">{{web}}</option>
+                    </select> -->
+              <!-- <select class="form-control" id="notificationLanguage" #sel8="ngModel"
+                      [(ngModel)]="notLangId" [ngModelOptions]="{standalone: true}"
+                      (ngModelChange)="notLangId = onChange(sel8)" required>
+                      <option *ngFor="let notificationLanguage of notifcationLanguageList" [selected]="notLangId"  [value]="notificationLanguage.id" >{{notificationLanguage.display}}</option>
+                                  
+                      </select> -->
+              <ng-select
+                class="custom"
+                [(ngModel)]="notificationLangSelected"
+                placeholder="select notification type"
+                [ngModelOptions]="{ standalone: true }"
+                style="padding: 0px; width: 100%"
+              >
+                <ng-option
+                  *ngFor="let notificationLanguage of notifcationLanguageList"
+                  [value]="notificationLanguage.display"
+                  >{{ notificationLanguage.display }}</ng-option
+                >
+              </ng-select>
+            </div>
+            <div class="col-sm-1">
+              <label for="notificationDelivery">Delivery :</label>
+            </div>
+            <div class="col-sm-3">
+              <!-- <select formControlName="notificationDelivery" [formGroup]="notificationInfo" placeholder="Notification Delivery">
+                    <option>Notification Delivery</option>
+                    <option *ngFor="let web of notificationDeliveryTypeList">{{web}}</option>
+                  </select> -->
+              <!-- <select class="form-control" id="notificationDelivery" #sel9="ngModel"
+                  [(ngModel)]="notDelId" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="notDelId = onChange(sel9)" required>
+                  <option *ngFor="let notificationDelivery of notificationDeliveryTypeList" [selected]="notDelId"  [value]="notificationDelivery.id" >{{notificationDelivery.display}}</option>
+                              
+                  </select> -->
+              <ng-select
+                class="custom"
+                [(ngModel)]="notificationDelSelected"
+                placeholder="select notification type"
+                [ngModelOptions]="{ standalone: true }"
+                style="padding: 0px; width: 100%"
+              >
+                <ng-option
+                  *ngFor="
+                    let notificationDelivery of notificationDeliveryTypeList
+                  "
+                  [value]="notificationDelivery.display"
+                  >{{ notificationDelivery.display }}</ng-option
+                >
+              </ng-select>
+            </div>
+          </div>
+  
+          <div class="row">
+            <div class="col-sm-2">
+              <label for="notificationText">Notification Text :</label>
+            </div>
+            <div class="col-sm-10">
+              <input
+                type="text"
+                formControlName="notificationText"
+                [(ngModel)]="notificationText"
+                name="notificationText"
+                placeholder="Notification Text"
+              />
+            </div>
+          </div>
+  
+          <div class="row">
+            <div class="col-sm-2">
+              <label for="notificationComment">Notification Comment :</label>
+            </div>
+            <div class="col-sm-10">
+              <input
+                type="text"
+                formControlName="notificationComment"
+                [(ngModel)]="notificationComment"
+                name="notificationComment"
+                placeholder="Notification Comment"
+              />
+            </div>
+          </div>
+  
+          <!-- <select formControlName="notificationType" [formGroup]="notificationInfo" placeholder="Notification Type">
+                  <option>Notification Type</option>
+                  <option *ngFor="let web of notificationTypeList">{{web}}</option>
+                  </select> -->
+          <!-- <input type="text" formControlName="notificationLanguage" name="notificationLanguage" placeholder="Notification Language"/> -->
+          <!-- <select formControlName="notificationLanguage" [formGroup]="notificationInfo" placeholder="Notification Language">
+                    <option>Notification Language</option>
+                    <option *ngFor="let web of notifcationLanguageList">{{web}}</option>
+                  </select> -->
+          <!-- <input type="text" formControlName="notificationText" name="notificationText" placeholder="Notification Text"/> -->
+          <!-- <input type="text" formControlName="notificationDelivery" name="notificationDelivery" placeholder="Notification Delivery"/> -->
+          <!-- <select formControlName="notificationDelivery" [formGroup]="notificationInfo" placeholder="Notification Delivery">
+                    <option>Notification Delivery</option>
+                    <option *ngFor="let web of notificationDeliveryTypeList">{{web}}</option>
+                  </select> -->
+  
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            fill="#ee0979"
+            class="bi bi-plus-circle"
+            (click)="addNotification()"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+            />
+            <path
+              d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"
+            /></svg
+          ><br />
+  
+          <table
+            *ngIf="notificationList?.length !== 0"
+            class="table table-responsive"
+          >
+            <thead>
+              <th>Sr. No.</th>
+              <th>Notification Type</th>
+              <th>Notification Language</th>
+              <th>Notification Text</th>
+              <th>Notification Delivery</th>
+              <th>Notification Comment</th>
+              <th>Action</th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of notificationList; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td title="{{ data.notificationType }}">
+                  {{ data.notificationType }}
+                </td>
+                <td title="{{ data.notificationLanguage }}">
+                  {{ data.notificationLanguage }}
+                </td>
+                <td title="{{ data.notificationText }}">
+                  {{ data.notificationText }}
+                </td>
+                <td title="{{ data.notificationDelivery }}">
+                  {{ data.notificationDelivery }}
+                </td>
+                <td title="{{ data.notificationComment }}">
+                  {{ data.notificationComment }}
+                </td>
+                <td>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    fill="#ee0979"
+                    class="bi bi-dash-circle"
+                    (click)="deleteNotification(i)"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+                    />
+                    <path
+                      d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"
+                    />
+                  </svg>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+  
+          <input
+            (click)="previous()"
+            type="button"
+            name="previous"
+            class="previous action-button-previous"
+            value="Previous"
+          />
+          <input
+            (click)="submit()"
+            type="submit"
+            name="submit"
+            class="submit action-button"
+            value="Submit"
+          />
+          <input
+            (click)="downloadPDFFile()"
+            type="button"
+            name="Export as PDF"
+            class="submit action-button"
+            value="Export as PDF"
+          />
+        </fieldset>
+      </form>
+      <div style="display: none">
+        <div #printDocid>
+          <div
+            style="
+              font-family: Arial, Helvetica, sans-serif;
+              font-size: 10px;
+              border-collapse: collapse;
+              width: 540px;
+            "
+          >
+            <h2 style="color: darkblue; margin-bottom: 0px; font-size: 18px">
+              Offer Name:{{ offerName }}
+            </h2>
+            <hr style="border-top: 1px solid rgb(82, 81, 81)" />
+            <p style="margin-bottom: 2px">
+              Offer Description: {{ offerDescription }}
+            </p>
+            <table style="border: och; width: 100%">
+              <tr>
+                <td>Offer ID: 450014566</td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr style="border: och; width: 100%">
+                <td style="width: 25%; text-align: left">
+                  Start Date:<span>{{ offerSalesStartDateValue }}</span>
+                </td>
+                <td style="width: 25%; text-align: left"></td>
+                <td style="width: 25%; text-align: left"></td>
+                <td style="width: 25%; text-align: right">
+                  End Date:<span>{{ offerSalesEndDateValue }}</span>
+                </td>
+              </tr>
+            </table>
+            <table style="border: 0px; width: 100%">
+              <tr>
+                <td style="width: 25%; text-align: left; font-weight: bold">
+                  Family Name:
+                </td>
+                <td style="width: 25%; text-align: left">
+                  {{ offerFamilyNameSelected }}
+                </td>
+                <td
+                  style="
+                    width: 25%;
+                    text-align: left;
+                    font-weight: bold;
+                    border-left: 2px solid black;
+                    padding-left: 5px;
+                  "
+                >
+                  Commercial Offer Name:
+                </td>
+                <td style="width: 25%; text-align: left">
+                  {{ commercialOfferName }}
+                </td>
+              </tr>
+              <tr>
+                <td style="width: 25%; text-align: left; font-weight: bold">
+                  Type:
+                </td>
+                <td style="width: 25%; text-align: left">
+                  {{ offerTypeSelected }}
+                </td>
+                <td
+                  style="
+                    width: 25%;
+                    text-align: left;
+                    font-weight: bold;
+                    border-left: 2px solid black;
+                    padding-left: 5px;
+                  "
+                >
+                  Offering Type:
+                </td>
+                <td style="width: 25%; text-align: left">
+                  {{ offeringTypeSelected }}
+                </td>
+              </tr>
+              <tr style="border-bottom: 1px; border-color: black">
+                <td style="width: 25%; text-align: left; font-weight: bold">
+                  Import offer:
+                </td>
+                <td style="width: 25%; text-align: left">Offer1212</td>
+                <td
+                  style="
+                    width: 25%;
+                    text-align: left;
+                    font-weight: bold;
+                    border-left: 2px solid black;
+                    padding-left: 5px;
+                  "
+                >
+                  Life Cycle:
+                </td>
+                <td style="width: 25%; text-align: left">
+                  {{ offeringLCTSelected }}
+                </td>
+              </tr>
+            </table>
+            <hr style="border-top: 0.5px solid rgb(82, 81, 81)" />
+            <table style="width: 100%">
+              <tr style="margin-top: 10px; margin-bottom: 10px">
+                <td style="width: 33%; text-align: left">
+                  Offer Channel: {{ offerChannelSelected }}
+                </td>
+                <td style="width: 33%; text-align: left">
+                  Offer Identifier: {{ offerIDFSelected }}
+                </td>
+                <td style="width: 33%; text-align: left">
+                  Number of Installement: {{ numberOfInstallment }}
+                </td>
+              </tr>
+              <tr style="margin-top: 10px; margin-bottom: 10px">
+                <td style="width: 33%; text-align: left">
+                  Offer Grouping: {{ offerGrouping }}
+                </td>
+                <td style="width: 33%; text-align: left">
+                  Shared Offer Flag (Y/N): {{ sharedOfferFlag }}
+                </td>
+                <td style="width: 33%; text-align: left">
+                  Offer Quanitity: {{ offerQuantity }}
+                </td>
+              </tr>
+              <tr style="margin-top: 10px; margin-bottom: 10px">
+                <td style="width: 33%; text-align: left">
+                  Loayalty One Time: {{ LoyaltyOneTime }}
+                </td>
+                <td style="width: 33%; text-align: left"></td>
+                <td style="width: 33%; text-align: left">
+                  Loaylty Points Recurring: {{ LoyaltyPointsRecurring }}
+                </td>
+                <td style="width: 25%; text-align: left"></td>
+              </tr>
+              <tr>
+                <td style="width: 33%; text-align: left">
+                  Parent Offer Name: {{ parentOfferName }}
+                </td>
+                <td style="width: 33%; text-align: left"></td>
+                <td style="width: 33%; text-align: left">
+                  Offer Relation Ship: {{ offerRelSelected }}
+                </td>
+              </tr>
+            </table>
+            <span style="margin-top: 5px"
+              >Installement Info : {{ installmentIfo }}</span
+            >
+            <br />
+            <div
+              style="
+                background-color: rgb(213, 213, 213);
+                width: 100%;
+                text-align: center;
+                font-size: 15px;
+              "
+            >
+              <h3 style="font-size: 12px; margin-top: 0px">
+                Channel Information
+              </h3>
+            </div>
+            <table style="width: 100%">
+              <tr>
+                <td style="width: 20%; text-align: left; font-weight: bold">
+                  Activation SMS Short Code:
+                </td>
+                <td style="width: 10%; text-align: left">
+                  {{ activationSMSShortCode }}
+                </td>
+                <td
+                  style="
+                    width: 20%;
+                    text-align: left;
+                    font-weight: bold;
+                    border-left: 2px solid black;
+                    padding-left: 5px;
+                  "
+                >
+                  Termination SMS Short Code:
+                </td>
+                <td style="width: 20%; text-align: left">
+                  {{ terminationSMSShortCode }}
+                </td>
+                <td
+                  style="
+                    width: 15%;
+                    text-align: left;
+                    font-weight: bold;
+                    border-left: 2px solid black;
+                    padding-left: 5px;
+                  "
+                >
+                  USSD Codes:
+                </td>
+                <td style="width: 10%; text-align: left">{{ USSDCodes }}</td>
+              </tr>
+            </table>
+            <div
+              style="
+                background-color: rgb(213, 213, 213);
+                width: 100%;
+                text-align: center;
+                font-size: 15px;
+              "
+            >
+              <h3 style="font-size: 12px; margin-top: 5px">Order Information</h3>
+            </div>
+            <table
+              style="
+                width: 100%;
+                border: 0.4px solid;
+                border-collapse: collapse;
+                border-color: rgb(136, 136, 136);
+                margin-top: 5px;
+              "
+            >
+              <tr>
+                <th
+                  style="
+                    width: 40%;
+                    font-weight: bold;
+                    padding-left: 10px;
+                    border: 0.4px solid;
+                    text-align: left;
+                    border-color: rgb(136, 136, 136);
+                  "
+                >
+                  Attribute Name
+                </th>
+                <th
+                  style="
+                    width: 60%;
+                    font-weight: bold;
+                    padding-left: 10px;
+                    border: 0.4px solid;
+                    text-align: left;
+                    border-color: rgb(136, 136, 136);
+                  "
+                >
+                  Attribute Description
+                </th>
+              </tr>
+              <tr *ngFor="let attribute of attributeList">
+                <td
+                  style="
+                    width: 40%;
+                    padding-left: 10px;
+                    border: 0.4px solid;
+                    text-align: left;
+                    border-color: rgb(136, 136, 136);
+                  "
+                >
+                  {{ attribute.attributeName }}
+                </td>
+                <td
+                  style="
+                    width: 60%;
+                    padding-left: 10px;
+                    border: 0.4px solid;
+                    text-align: left;
+                    border-color: rgb(136, 136, 136);
+                  "
+                >
+                  {{ attribute.attributeDescription }}
+                </td>
+              </tr>
+            </table>
+            <div
+              style="
+                background-color: rgb(213, 213, 213);
+                width: 100%;
+                text-align: center;
+                font-size: 15px;
+                margin-top: 5px;
+              "
+            >
+              <h3 style="font-size: 12px; margin-top: 0px">
+                Notification Information
+              </h3>
+            </div>
+            <div
+              width="100%"
+              *ngFor="let data of notificationList; let i = index"
+            >
+              <span
+                style="
+                  color: black;
+                  text-decoration: underline;
+                  text-align: left;
+                  font-size: 11px;
+                  font-weight: bold;
+                  padding: 3px;
+                "
+                >Notification {{ i + 1 }}</span
+              >
+  
+              <table style="width: 100%; margin-top: 0px; padding-top: 0px">
+                <tr>
+                  <td style="width: 20%; text-align: left; font-weight: bold">
+                    Notifications Type:
+                  </td>
+                  <td style="width: 10%; text-align: left">
+                    {{ data.notificationType }}
+                  </td>
+                  <td
+                    style="
+                      width: 20%;
+                      text-align: left;
+                      font-weight: bold;
+                      border-left: 2px solid black;
+                      padding-left: 5px;
+                    "
+                  >
+                    Notification Language:
+                  </td>
+                  <td style="width: 20%; text-align: left">
+                    {{ data.notificationLanguage }}
+                  </td>
+                  <td
+                    style="
+                      width: 15%;
+                      text-align: left;
+                      font-weight: bold;
+                      border-left: 2px solid black;
+                      padding-left: 5px;
+                    "
+                  >
+                    Notification Delivery:
+                  </td>
+                  <td style="width: 10%; text-align: left">
+                    {{ data.notificationDelivery }}
+                  </td>
+                </tr>
+              </table>
+              <span style="margin-top: 5px"
+                >Nofication Text : {{ data.notificationText }}</span
+              >
+              <br />
+              <span style="margin-top: 0px"
+                >Notification Comments : {{ data.notificationComment }}</span
+              >
+              <br />
+              <br />
+            </div>
+            <!--
+    <div width="100%">
+      <span
+        style="
+          color: black;
+          text-decoration: underline;
+          text-align: left;
+          font-size: 11px;
+          font-weight: bold;
+          padding: 3px;
+        "
+        >Notification 2</span
+      >
+  
+      <table style="width: 100%; margin-top: 0px; padding-top: 0px">
+        <tr>
+          <td style="width: 20%; text-align: left; font-weight: bold">
+            Notifications Type:
+          </td>
+          <td style="width: 10%; text-align: left">Notification</td>
+          <td
+            style="
+              width: 20%;
+              text-align: left;
+              font-weight: bold;
+              border-left: 2px solid black;
+              padding-left: 5px;
+            "
+          >
+            Notification Language:
+          </td>
+          <td style="width: 20%; text-align: left">English</td>
+          <td
+            style="
+              width: 15%;
+              text-align: left;
+              font-weight: bold;
+              border-left: 2px solid black;
+              padding-left: 5px;
+            "
+          >
+            Notification Delivery:
+          </td>
+          <td style="width: 10%; text-align: left">eMail</td>
+        </tr>
+      </table>
+      <span style="margin-top: 5px"
+        >Nofication Text : This is Notification text long description.</span
+      >
+      <br />
+      <span style="margin-top: 0px"
+        >Notification Comments : This is Notification comment long
+        description.</span
+      >
+    </div>
+    -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

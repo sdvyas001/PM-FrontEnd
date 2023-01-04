@@ -1,0 +1,27 @@
+<a cButton class="me-1" color="primary" routerLink="./create-project">
+    Create Project
+</a>
+
+<table cTable>
+    <thead>
+    <tr>
+    <th scope="col">ID</th>
+    <th scope="col">Name</th>
+    <th scope="col">Description</th>
+    <th scope="col">Status</th>
+    <th scope="col">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let project of projects">
+    <th scope="row">{{project.id}}</th>
+    <td>{{project.name}}</td>
+    <td>{{project.description}}</td>
+    <td>{{project.status}}</td>
+    <td><mat-icon (click)="editProject(project.id)" routerLink="./update-project">edit_note</mat-icon><mat-icon (click)="deleteProject(project.id)">delete_forever</mat-icon></td>
+    </tr>
+    
+    </tbody>
+    </table>
+    
+  

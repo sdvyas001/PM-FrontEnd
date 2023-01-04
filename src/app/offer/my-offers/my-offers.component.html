@@ -1,0 +1,80 @@
+
+<a cButton class="me-1" color="primary" routerLink="./create-offer">
+  Create Offer
+</a>
+  
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> 
+      <span [style.paddingLeft.px]="40"> Name </span>
+    </th>
+    <td mat-cell *matCellDef="let data"> 
+      <button mat-icon-button 
+              [style.visibility]="!data.expandable ? 'hidden' : ''"
+              [style.marginLeft.px]="data.level * 32"
+              (click)="treeControl.toggle(data)">
+        <mat-icon class="mat-icon-rtl-mirror">
+          {{treeControl.isExpanded(data) ? 'expand_more' : 'chevron_right'}}
+        </mat-icon>
+      </button>
+
+      {{data.name}}
+    </td>
+    
+  </ng-container> 
+
+  <ng-container matColumnDef="count">
+    <th mat-header-cell *matHeaderCellDef> Description </th>
+    <td mat-cell *matCellDef="let data"> {{data.description}} </td>
+  </ng-container> 
+  <ng-container matColumnDef="sales_start_date">
+    <th mat-header-cell *matHeaderCellDef> Sales Start Date </th>
+    <td mat-cell *matCellDef="let data"> {{data.sales_start_date}} </td>
+  </ng-container> 
+  <ng-container matColumnDef="sales_end_date">
+    <th mat-header-cell *matHeaderCellDef> Sales End Date </th>
+    <td mat-cell *matCellDef="let data"> {{data.sales_end_date}} </td>
+  </ng-container>
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> Id </th>
+    <td mat-cell *matCellDef="let data"> {{data.id}} </td>
+  </ng-container>
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef> Action </th>
+    <td mat-cell *matCellDef="let data"> <mat-icon (click)="editOffer()" routerLink="./update-offer">edit_note</mat-icon><mat-icon (click)="deleteOffer(data.id)">delete_forever</mat-icon></td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<table class="table table-striped table-dark">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</table>

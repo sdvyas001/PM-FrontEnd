@@ -1,0 +1,59 @@
+<p>update-project works!</p>
+
+
+<c-card class="text-center mb-4">
+    <c-card-body>
+      <h5 cCardTitle></h5>
+      <p cCardText>
+        <!-- <c-row class="mb-3">
+            <label [sm]="2" cCol cLabel="col" for="staticEmail">
+              Project ID
+            </label>
+            <c-col [sm]="10">
+              <input cFormControl id="staticEmail" plaintext readonly type="text" value="PM-12345" />
+            </c-col>
+          </c-row> -->
+          <c-row class="mb-3">
+            <label cLabel="col" class="col-sm-2" for="projectName">
+              Project Name
+            </label>
+            <c-col [sm]="10">
+              <input cFormControl id="projectName" type="text" [(ngModel)]="project.name" id="name"  name="name"/>
+            </c-col>
+          </c-row>
+          <c-row class="mb-3">
+            <label cLabel="col" class="col-sm-2" for="projectDescription">
+              Project Description
+            </label>
+            <c-col [sm]="10">
+              <input cFormControl id="projectDescription" type="text" [(ngModel)]="project.description" id="description"  name="description" />
+            </c-col>
+          </c-row>
+          <c-row class="mb-3">
+            <label cLabel="col" class="col-sm-2" for="inputPassword">
+              Project Status
+            </label>
+            <c-col [sm]="10">
+                <select aria-label="Default select example"  [(ngModel)]="selectedValue" cSelect>
+                    <option *ngFor="let status of statusValues" [ngValue]="status">{{status.name}}</option>
+                    <!-- <option value="1">Draft</option>
+                    <option value="2">Under Implementation</option>
+                    <option value="3">Live</option>
+                    <option value="4">Cancelled</option> -->
+                  </select>
+            </c-col>
+          </c-row>
+      </p>
+      <button cButton color="primary" (click)="updateProject()">Update</button>
+      <c-alert [(visible)]="visible"
+         [dismissible]="dismissible"
+         color="warning"
+         fade
+         *ngIf="successMsg"
+         color="success">
+  <strong>Project Updated Successfully</strong> 
+</c-alert>
+    </c-card-body>
+</c-card>
+ 
+

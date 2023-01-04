@@ -1,0 +1,161 @@
+.example-tree-invisible {
+    display: none;
+  }
+  
+  .example-tree ul,
+  .example-tree li {
+    margin-top: 0;
+    margin-bottom: 0;
+    list-style-type: none;
+  }
+  
+  /*
+   * This padding sets alignment of the nested nodes.
+   */
+  .example-tree .mat-nested-tree-node div[role=group] {
+    padding-left: 40px;
+  }
+  
+  /*
+   * Padding for leaf nodes.
+   * Leaf nodes need to have padding so as to align with other non-leaf nodes
+   * under the same parent.
+   */
+  .example-tree div[role=group] > .mat-tree-node {
+    padding-left: 40px;
+  }
+  table {
+    width: 100%;
+  }
+ 
+  tr.hide-table-padding td {
+    padding: 0;
+    }
+  
+    .expand-button {
+      position: relative;
+    }
+  
+    .accordion-toggle .expand-button:after
+    {
+      position: absolute;
+      left:.75rem;
+      top: 50%;
+      transform: translate(0, -50%);
+      content: '-';
+    }
+    .accordion-toggle.collapsed .expand-button:after
+    {
+      content: '+';
+    }
+
+    p {
+      font-family: Lato;
+    }
+    table {
+      width: 100%;
+    }
+    
+    tr.example-detail-row {
+      height: 0;
+    }
+    
+    tr.example-element-row:not(.example-expanded-row):hover {
+      background: whitesmoke;
+    }
+    
+    tr.example-element-row:not(.example-expanded-row):active {
+      background: #efefef;
+    }
+    
+    .example-element-row td {
+      border-bottom-width: 0;
+    }
+    
+    .example-element-detail {
+      overflow: hidden;
+      display: flex;
+    }
+    
+    .example-element-diagram {
+      min-width: 80px;
+      border: 2px solid black;
+      padding: 8px;
+      font-weight: lighter;
+      margin: 8px 0;
+      height: 104px;
+    }
+    
+    .example-element-symbol {
+      font-weight: bold;
+      font-size: 40px;
+      line-height: normal;
+    }
+    
+    .example-element-description {
+      padding: 16px;
+    }
+    
+    .example-element-description-attribution {
+      opacity: 0.5;
+    }
+
+    .childOfferTable {
+      border: 1px solid black;
+    }
+
+    .example-tree-invisible {
+      display: none;
+    }
+    
+    .example-tree ul,
+    .example-tree li {
+      margin-top: 0;
+      margin-bottom: 0;
+      list-style-type: none;
+    }
+    
+    button[nbTreeGridRowToggle] {
+      background: transparent;
+      border: none;
+      padding: 0;
+    }
+    
+    .search-label {
+      display: block;
+    }
+    .search-input {
+      margin-bottom: 1rem;
+    }
+    
+    .nb-column-name {
+      width: 100%;
+    }
+    
+    @media screen and (min-width: 400px) {
+      .nb-column-name,
+      .nb-column-size {
+        width: 50%;
+      }
+    }
+    
+    @media screen and (min-width: 500px) {
+      .nb-column-name,
+      .nb-column-size,
+      .nb-column-kind {
+        width: 33.333%;
+      }
+    }
+    
+    @media screen and (min-width: 600px) {
+      .nb-column-name {
+        width: 31%;
+      }
+      .nb-column-size,
+      .nb-column-kind,
+      .nb-column-items {
+        width: 23%;
+      }
+    }
+
+
